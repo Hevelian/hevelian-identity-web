@@ -80,14 +80,24 @@
 	
 }
 
+.login-header {
+	background-color: #e9f1f7;
+	border-radius: 5px 5px 0 0;
+	border: 1px solid #a4b4bd;
+	border-bottom: 0px;
+	padding: 20px 10px;
+	width: 560px;
+	height: 30px;
+	margin-top: 100px;
+	
+}
+
 .login-panel {
 	background-color: #f3f5f7;
-	border-radius: 5px 5px 0 0;
 	border: 1px solid #a4b4bd;
 	padding: 30px 10px;
 	width: 560px;
-	height: 200px;
-	margin-top: 100px;
+	height: 160px;
 }
 
 .siBut {

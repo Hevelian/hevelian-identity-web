@@ -5,27 +5,52 @@
         <title>Hevelian Identity</title>
         <link rel="stylesheet" href="css/hevelian.css"/>
         
-        <!-- 
         <script src="scripts/hevelian/ajax.js"></script>
-        <script src="scripts/hevelian/session.js"></script>
         <script src="scripts/hevelian/authenticator.js"></script>
-        <script src="scripts/hevelian/data/RecordSet.js"></script>
 
-        <script src="scripts/hevelian/controllers/MainController.js"></script>
-        <script src="scripts/hevelian/controllers/TabController.js"></script>
-        <script src="scripts/hevelian/controllers/IdentityController.js"></script>
-        <script src="scripts/hevelian/controllers/HelloController.js"></script>
-        
-        <script src="scripts/hevelian/hevelian_objects.js"></script>
+        <!-- 
+        <script src="scripts/hevelian/session.js"></script>
         <script src="scripts/hevelian/main.js"></script>
          -->
+         
+         <script language="javascript">
+         
+			function GetParam(_name) {
+				var _url = new String(document.location.href);
+				try { var _parts = _url.split("?")[1].split("&"); } catch(_e) { return ''; }
+				for(var i=0; i<_parts.length; i++) { var _arg = _parts[i].split('='); if(_arg[0] == _name) { return _arg[1]; }}
+				return '';
+			}
+         
+         
+	         /**
+	          * we check if the tenant id has been supplied on the url, otherwise we show the tenant id field in the form.
+	          */
+	         function TenantIdCheck() {
+	         	var id_row = document.getElementById("tenant_id_row");
+	         	var tenant_id_field = document.getElementById("frmTenantId");
+	         	var param_tenant_id = GetParam("tenantId");
+	         	
+	         	if(param_tenant_id==null || param_tenant_id=="") {
+	         		tenant_id_row.style.display = 'table-row';
+	         	} else {
+	         		tenant_id_row.style.display = 'none';
+	         		tenant_id_field.value = param_tenant_id;
+	         	}
+	         	
+	         }
+         </script>
 </head>
-<body style="font-family: Verdana; font-size: 10px; line-height: 20px; background-image: url(images/content_noise_bg.png)">
+<body style="font-family: Verdana; font-size: 10px; line-height: 20px; background-image: url(images/content_noise_bg.png)" onLoad="TenantIdCheck()">
         <center>
+        <div class="login-header" style="text-align: center;">
+        	<span class="td_h_title">Hevelian Identity Server</span>
+		</div>
         <div class="login-panel">
                 <table cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                                <td colspan="2" class="td_h_title">Hevelian Application Manager</td>
+                        <tr id="tenant_id_row">
+                                <td class="td_h_username">Tenant:</td>
+                                <td><input class="loginInput" id="frmTenantId" type="text" width="100px" name="frmTenantId"/></td>
                         </tr>
                         <tr>
                                 <td class="td_h_username">Username:</td>
