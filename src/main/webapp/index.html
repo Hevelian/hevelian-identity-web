@@ -2,11 +2,16 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hevelian Identity</title>
+        <title>Hevelian Identity Server</title>
         <link rel="stylesheet" href="css/hevelian.css"/>
         
         <script src="scripts/hevelian/ajax.js"></script>
         <script src="scripts/hevelian/authenticator.js"></script>
+        <script src="scripts/hevelian/controllers/SessionController.js"></script>
+
+        <script src="scripts/hevelian/messages/default.js"></script>
+
+        <script src="scripts/hevelian/hevelian.js"></script>
 
         <!-- 
         <script src="scripts/hevelian/session.js"></script>
@@ -39,6 +44,13 @@
 	         	}
 	         	
 	         }
+	         
+	         function attemptLogin() {
+	        	 var _username = document.getElementById("frmUsername").value;
+	        	 var _password = document.getElementById("frmPassword").value;
+	        	 var _tenantId = document.getElementById("frmTenantId").value;
+	        	 Hevelian.auth.Session.attemptLogin(_username, _password, _tenantId);
+	         }
          </script>
 </head>
 <body style="font-family: Verdana; font-size: 10px; line-height: 20px; background-image: url(images/content_noise_bg.png)" onLoad="TenantIdCheck()">
@@ -62,7 +74,8 @@
                         </tr>
                         <tr>
                                 <td>&nbsp;</td>
-                                <td class="td_h_login"><input class="siBut" type="button" width="100px" name="frmSubmitButton" value="&nbsp;Sign In&nbsp;" onClick="attemptLogin()"/><br/>
+                                <td class="td_h_login"><input class="siBut" type="button" width="100px" name="frmSubmitButton" value="&nbsp;Sign In&nbsp;" 
+                                	onClick="attemptLogin()"/><br/>
                                 <span style="color: red; line-height: 20px; margin-top:4px;" id="frmMessage">&nbsp;</span></td>
                         </tr>
                 </table>
