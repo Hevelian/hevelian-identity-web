@@ -16,15 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/ui.svc")
-public class ServiceUserInterface {
+public class UserInterfaceController {
 
 	@RequestMapping(value="/template", method=RequestMethod.GET, produces="application/xml")
 	@ResponseBody
 	public String handleTemplate(HttpServletRequest request, @RequestParam(value="name", required=false) String templateName) 
 			throws ParserConfigurationException, IOException {
 		
-		String templatePath = "xml/" + templateName + ".xml";
-		InputStream input = request.getServletContext().getResourceAsStream(templatePath);
+		InputStream input = getResourceAsStream(request, templateName);
 		StringBuffer sb = new StringBuffer();
 		BufferedReader br = new BufferedReader(new InputStreamReader(input));
 		for(String line; (line = br.readLine())!=null;) {
@@ -33,7 +32,19 @@ public class ServiceUserInterface {
 		br.close();
 		
 		// TODO: parse the template and validate against XACML engine
-		
+
 		return sb.toString();
+	}
+	
+	/**
+	 * Helper function to find a template file as a resource and return the input stream to it.
+	 * @param request
+	 * @param templateName
+	 * @return
+	 */
+	private InputStream getResourceAsStream(HttpServletRequest request, String templateName) {
+		String templatePath = "xml/" + templateName + ".xml";
+		InputStream input = request.getServletContext().getResourceAsStream(templatePath);
+		return input;
 	}
 }
