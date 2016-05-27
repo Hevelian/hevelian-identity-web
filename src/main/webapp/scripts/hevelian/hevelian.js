@@ -8,8 +8,15 @@ Hevelian.auth = {};
 Hevelian.auth.Authenticator = Authenticator;
 Hevelian.auth.Session = new SessionController();
 
+Hevelian.controller = {};
+Hevelian.controller.MainController 		= MainController;
+Hevelian.controller.TabController 		= TabController;
+Hevelian.controller.HelloController 	= HelloController;
+
 //connection stuff
 Hevelian.con = {};
 Hevelian.con.AJAX = AJAX;
+
+Hevelian.objects = [];
 
 console.log("Hevelian Initialised.");

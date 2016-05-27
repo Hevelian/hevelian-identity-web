@@ -16,15 +16,27 @@ function SessionController() {
 	function _attemptLogin(_username, _password, _tenantId) {
 		console.log("AttemptLogin: " + _username);
 		
+		document.getElementById("frmMessage").innerHTML = "logging in...";
 		var msg = new SimpleMessage();
 		msg.header.type = "login";
 		msg.data["username"] = _username;
 		msg.data["password"] = _password;
 		msg.data["tenantId"] = _tenantId;
-		worker.postMessage(msg);
+		worker.postMessage(msg);		
 	}
 	
 	function _callback(oEvent) {
-		console.log("Session: Got Event Message: " + oEvent.data);
+		
+		switch(oEvent.data.header.type) {
+			case "login":
+				if(oEvent.data.data["status"]!="true") {
+					document.getElementById("frmMessage").innerHTML = oEvent.data.data["message"];
+					break;
+				}
+				document.location.href = "main.html?tenantId=" +  oEvent.data.data["tenantId"] + "&username=" + oEvent.data.data["username"];
+				break;
+			default:
+				console.log("SessionController: Unknown Event Message: " + oEvent.data);
+		}
 	}
 }

@@ -9,12 +9,13 @@ scriptLocation = FixLocation();
 
 importScripts(scriptLocation + "ajax.js");
 importScripts(scriptLocation + "objects/SessionWorkerObject.js");
+importScripts(scriptLocation + "messages/default.js");
 
 onmessage = SessionWorker;
 session = new SessionWorkerObject();
 
 function SessionWorker(oEvent) {
-	postMessage("SessionWorker: Location: " + scriptLocation);
+	console.log("SessionWorker: Location: " + scriptLocation);
 	
 	switch(oEvent.data.header.type) {
 	case 'login':
