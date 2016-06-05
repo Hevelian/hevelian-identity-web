@@ -34,9 +34,9 @@
 		<product.name>Hevelian Identity Web Server</product.name>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 
-		<spring.version>4.2.4.RELEASE</spring.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
 		<spring-security.version>4.1.0.RELEASE</spring-security.version>
-		<spring.data.version>1.9.2.RELEASE</spring.data.version>
+		<spring.data.version>1.9.4.RELEASE</spring.data.version>
 		<log4j.version>2.5</log4j.version>		
 	</properties>
 
