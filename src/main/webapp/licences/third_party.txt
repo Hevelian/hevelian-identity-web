@@ -1,0 +1,13 @@
+JavaScript
+----------
+Bootstrap (http://getbootstrap.com): MIT
+JQuery (http://jquery.org): MIT
+
+Java
+----
+JUnit (http://junit.org/junit4/) : Eclipse Public License 1.0
+Spring WebMVC (https://github.com/spring-projects) : Apache 2.0
+Spring Security (https://github.com/spring-projects) : Apache 2.0
+allanditzel (https://github.com/aditzel/spring-security-csrf-filter) : Apache 2.0
+H2 Database (http://h2database.com/html/main.html) : Eclipse Public License 1.0
+Log4J (http://logging.apache.org/log4j/2.x/) : Apache 2.0
