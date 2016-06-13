@@ -11,6 +11,8 @@ Hevelian.auth.Session = new SessionController();
 Hevelian.controller = {};
 Hevelian.controller.MainController 		= MainController;
 Hevelian.controller.TabController 		= TabController;
+Hevelian.controller.TenantController 	= TenantController;
+
 Hevelian.controller.HelloController 	= HelloController;
 
 //connection stuff

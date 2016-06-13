@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui>
 	<tabset id="main" controller="TabController">
-		<tab id="tenants" 			authToken="HIS.main.Tenants"			controller="HelloController">Tenants</tab>
+		<tab id="tenants" 			authToken="HIS.main.Tenants"			controller="TenantController">Tenants
+			<widgets>
+				<widget id="activeTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="otherTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="someTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="andTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="moreTenants" authToken="HIS.main.Tenants.activeTentants"/>
+			</widgets>
+		</tab>
 		<tab id="Configuration" 	authToken="HIS.main.Configuration"		controller="HelloController">Configuration</tab>
 	</tabset>
 </ui>

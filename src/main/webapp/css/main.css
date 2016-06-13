@@ -1,6 +1,55 @@
 #main {
 	background-color: #e0e0e0;
 	overflow: hidden;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.fixed-panel {
+  max-height: 80px;
+  max-width: 180px;
+  padding: 0px;
+  float: left;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.chart-canvas {
+  	float: left;
+	max-width: 150px;
+	height: 150px;
+	width: 150px;
+	position: relative;
+	display: block;
+	top: -80px;
+	left: 67px;
+}
+
+.chart-text {
+  max-width: 100px;
+  height: 80px;
+  float: left;
+  display: inline-block;
+  overflow-y: hidden;
+  border-bottom: 0px solid #a0a0a0;
+}
+
+.col-inspector {
+	padding-left: 0px;
+	padding-right: 0px;	
+}
+
+.panel-inspector {
+	border: 1px solid #f0f0f0;	
+}
+
+.row-padding {
+	padding-top: 0px;	
+	padding-left: 0px;
 }
 
 ._container_ {
@@ -628,11 +677,12 @@
 }
 
 .tab_content {
-	height: 50px;
+	height: 100%;
 	width: 100%;
 	top: 38px;
 	position: absolute;
 	display: block;
 	float: left;
 	overflow: scroll;
+	background-color: white;
 }
