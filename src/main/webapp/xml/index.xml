@@ -3,7 +3,12 @@
 	<tabset id="main" controller="TabController">
 		<tab id="tenants" 			authToken="HIS.main.Tenants"			controller="TenantController">Tenants
 			<widgets>
-				<widget id="activeTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="activeTenants" authToken="HIS.main.Tenants.activeTentants">
+					<name>Active Tenants</name>
+					<endpoint></endpoint>
+					<method>count</method>
+					<property>active</property>
+				</widget>
 				<widget id="otherTenants" authToken="HIS.main.Tenants.activeTentants"/>
 				<widget id="someTenants" authToken="HIS.main.Tenants.activeTentants"/>
 				<widget id="andTenants" authToken="HIS.main.Tenants.activeTentants"/>

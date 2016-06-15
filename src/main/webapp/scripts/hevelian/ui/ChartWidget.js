@@ -18,8 +18,6 @@ function ChartWidget() {
 
 		id 			= getId() + "_chartwidget";
 		
-//		target.style.borderBottom = "1px solid black";
-		
 		var divMain = document.createElement("DIV");
 		divMain.setAttribute("class", "panel panel-primary");
 		target.appendChild(divMain);
@@ -43,6 +41,8 @@ function ChartWidget() {
 	}
 	
 	function _drawChart() {
+		
+		// FAKE DATA 
 		var myChart = new Chart(container, {
 		    type: 'doughnut',
 		    data: {

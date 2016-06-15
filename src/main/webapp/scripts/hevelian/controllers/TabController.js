@@ -93,6 +93,8 @@ function TabController() {
 		var idParts = e.target.id.split("_");
 		currentTab = idParts[idParts.length-1];
 		document.getElementById(id + "_container_" + currentTab).style.display = 'block';
+		
+		controllers[parseInt(currentTab)].focus();
 	}
 	
 	/**

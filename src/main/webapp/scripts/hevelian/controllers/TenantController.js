@@ -9,6 +9,7 @@ function TenantController() {
 	var container					= null;
 	var widgetRow					= null;
 	var widgets						= [];
+	var worker						= null;
 	
 	this.init						= _init;
 	this.focus						= _focus;
@@ -25,7 +26,11 @@ function TenantController() {
 	}
 	
 	function _focus() {
-		_createContainer();
+		if(container==null) {
+			_createContainer();
+		} else {
+			// refresh the data and un-pause the worker
+		}
 	}
 	
 	function _createContainer() {
@@ -66,7 +71,7 @@ function TenantController() {
 		dataHeaderEmptyColumn.setAttribute("class", "col-md-4");
 		dataHeaderRow.appendChild(dataHeaderEmptyColumn);
 
-		// DEBUG
+		// DEBUG - FAKE DATA
 		dataHeaderNewButtonColumn.innerHTML = '<p><a class="btn btn-default btn-sm" href="#" role="button">New Tenant</a></p>';
 		dataHeaderCountColumn.innerHTML = 'Showing 5 of 5 tenants';
 		dataHeaderCountColumn.style.paddingTop = "14px";
@@ -128,7 +133,7 @@ function TenantController() {
 			str += '<tr><td>domain_001</td><td>admin</td><td>false</td></tr></tbody>';
 		str += '</table>';
 		
-		panelHeader.innerHTML = "showing 5 of 5 tenants";
+		panelHeader.innerHTML = "Tenants";
 		panel.innerHTML += str;
 	}
 }

@@ -20,7 +20,6 @@ function HelloController() {
 		var date 	= new Date();
 		id 			= getId() + "_hello";
 		
-		_target.innerHTML = "Hello World from " + id;
 	}
 	
 	function _focus() {
