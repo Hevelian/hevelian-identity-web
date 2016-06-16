@@ -9,8 +9,11 @@ function ChartWidget() {
 	var doc							= null;
 	var id							= null;
 	var container					= null;
+	var worker						= null;
+	var chart						= null;
 	
 	this.init			= _init;
+	this.OnMessage		= _onMessage;
 	
 	function _init(_target, _doc) {
 		doc 		= _doc;
@@ -29,21 +32,39 @@ function ChartWidget() {
 		var divBodyText = document.createElement("DIV");
 		divBodyText.setAttribute("class", "chart-text");
 		divMainBody.appendChild(divBodyText);
-		divBodyText.innerHTML = 'Active Tenants<br/><br/><span style="color: #d0d0d0; font-size: 32px;">90%</span>';
+		divBodyText.innerHTML = 'Active Tenants<br/><br/><span id="indicator_' + id +'" style="color: #d0d0d0; font-size: 32px;">90%</span>';
 		
 		// add canvas for the chart object
 		container = document.createElement("canvas");
 		container.setAttribute("class", "chart-canvas");
 		divMainBody.appendChild(container);
 		
-		
+		worker = new Worker("scripts/hevelian/workers/ChartWidgetWorker.js");
+		worker.onmessage = this.OnMessage;
+
+		var msg = new SimpleMessage();
+		msg.header.type = "init";
+		worker.postMessage(msg);		
+
 		_drawChart();
+	}
+	
+	function _onMessage(oEvent) {
+		console.log("ChartWidget got message");
+		console.log("ChartWidget Event: active: " + oEvent.data.data["active"]);
+		console.log("ChartWidget Event: inactive: " + oEvent.data.data["inactive"]);
+		
+		chart.data.datasets[0].data[0] = oEvent.data.data["active"];
+		chart.data.datasets[0].data[1] = oEvent.data.data["inactive"];
+		chart.update();
+		
+		document.getElementById("indicator_" + id).innerHTML = oEvent.data.data["active"] + '%';
 	}
 	
 	function _drawChart() {
 		
 		// FAKE DATA 
-		var myChart = new Chart(container, {
+		chart = new Chart(container, {
 		    type: 'doughnut',
 		    data: {
 		        labels: ["Active", "Inactive"],
