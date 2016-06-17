@@ -17,11 +17,21 @@ var _enabled	= false;
 var _timeout 	= null;
 var _interval	= 10000;
 
+/**
+ * ChartWidgetWorker
+ * Main event handler for messages coming from the UI layer
+ * 
+ * @param oEvent
+ */
 function ChartWidgetWorker(oEvent) {
 
 	switch(oEvent.data.header.type) {
 	case 'init':
+		console.log("chart widget initialised");
 		_enabled = true;
+		var _data = oEvent.data.data;
+		chart.init(_data["endpoint"], _data["method"], _data["property"], _data["refresh"]);
+		_interval = _data["refresh"] * 1000; // convert to milliseconds
 		_timeout = setTimeout(ChartTimer, _interval);
 		break;
 
@@ -40,15 +50,17 @@ function ChartWidgetWorker(oEvent) {
 	case 'reset':
 	case 'refresh':
 	case 'pause':
+		// unsupported but required event messages, do nothing but dont error
 		break;
 	default:
 		console.log("ChartWidgetWorker: unknown event type");
 	}
 }
 
+/**
+ * When the timer kicks in, we run this - currently RANDOM DEBUG results are returned
+ */
 function ChartTimer() {
-	// Math.floor((Math.random() * 100))
-	
 	var _active = Math.floor((Math.random() * 100));
 	var _inactive = 100 - _active;
 	
@@ -56,12 +68,15 @@ function ChartTimer() {
 	msg.header.type = "update";
 	msg.data["active"] = _active;
 	msg.data["inactive"] = _inactive;
-	postMessage(msg);		
+	postMessage(msg);
 	
-	console.log("ChartWidgetWorker: timer kicked off");
 	_timeout = setTimeout(ChartTimer, _interval);
 }
 
+/**
+ * Helper function to create absolute url's to the imported JS files.
+ * @returns {String}
+ */
 function FixLocation() {
 	var locationParts = location.href.split("\/");
 	return locationParts[0] + "//" + locationParts[2] + "/" + locationParts[3] + "/scripts/hevelian/";

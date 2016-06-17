@@ -3,16 +3,24 @@
 	<tabset id="main" controller="TabController">
 		<tab id="tenants" 			authToken="HIS.main.Tenants"			controller="TenantController">Tenants
 			<widgets>
-				<widget id="activeTenants" authToken="HIS.main.Tenants.activeTentants">
+				<widget id="activeTenants" authToken="HIS.main.Tenants.activeTentants" refresh="10">
 					<name>Active Tenants</name>
 					<endpoint></endpoint>
 					<method>count</method>
 					<property>active</property>
 				</widget>
-				<widget id="otherTenants" authToken="HIS.main.Tenants.activeTentants"/>
-				<widget id="someTenants" authToken="HIS.main.Tenants.activeTentants"/>
-				<widget id="andTenants" authToken="HIS.main.Tenants.activeTentants"/>
-				<widget id="moreTenants" authToken="HIS.main.Tenants.activeTentants"/>
+				<widget id="anotherTenants" authToken="HIS.main.Tenants.anotherTentants" refresh="2">
+					<name>Another Counter</name>
+					<endpoint></endpoint>
+					<method>count</method>
+					<property>active</property>
+				</widget>
+				<widget id="testTenants" authToken="HIS.main.Tenants.testTentants" refresh="1">
+					<name>Test Counter</name>
+					<endpoint></endpoint>
+					<method>count</method>
+					<property>active</property>
+				</widget>
 			</widgets>
 		</tab>
 		<tab id="Configuration" 	authToken="HIS.main.Configuration"		controller="HelloController">Configuration</tab>

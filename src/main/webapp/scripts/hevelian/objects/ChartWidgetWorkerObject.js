@@ -5,15 +5,21 @@
  */
 
 function ChartWidgetWorkerObject() {
-	var endpoint = null;
-	var method = null;
-	var property = null;
+	var endpoint 	= null;
+	var method 		= null;
+	var property 	= null;
+	var refresh		= 10;
 	
 	this.init = _init;
 	
-	function _init(_endpoint, _method, _property) {
-		endpoint = _endpoint;
-		method = _method;
-		property = _property;
+	/**
+	 * Initialise WorkerObject
+	 */
+	function _init(_endpoint, _method, _property, _refresh) {
+		endpoint 	= _endpoint;
+		method 		= _method;
+		property 	= _property;
+		
+		if(_refresh!=null) refresh = _refresh;
 	}
 }
