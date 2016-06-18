@@ -11,6 +11,7 @@ function ChartWidgetWorkerObject() {
 	var refresh		= 10;
 	
 	this.init = _init;
+	this.refresh = _refresh;
 	
 	/**
 	 * Initialise WorkerObject
@@ -21,5 +22,19 @@ function ChartWidgetWorkerObject() {
 		property 	= _property;
 		
 		if(_refresh!=null) refresh = _refresh;
+	}
+	
+	function _refresh() {
+		// DEBUG
+		// we should fetch the values from the endpoint - this generates random values at the moment
+		var _active = Math.floor((Math.random() * 100));
+		var _inactive = 100 - _active;
+		
+		var msg = new SimpleMessage();
+		msg.header.type = "update";
+		msg.data[0] = {name: "active", value: _active }
+		msg.data[1] = {name: "inactive", value: _inactive }
+		
+		return msg;
 	}
 }

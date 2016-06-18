@@ -29,6 +29,7 @@ function ChartWidgetWorker(oEvent) {
 	case 'init':
 		console.log("chart widget initialised");
 		_enabled = true;
+		
 		var _data = oEvent.data.data;
 		chart.init(_data["endpoint"], _data["method"], _data["property"], _data["refresh"]);
 		_interval = _data["refresh"] * 1000; // convert to milliseconds
@@ -41,15 +42,18 @@ function ChartWidgetWorker(oEvent) {
 		_timeout = setTimeout(ChartTimer, _interval);
 		break;
 
+	case 'pause':
 	case 'stop':
 		if(_timeout!=null) clearTimeout(_timeout);
 		_enabled = false;
 		_timeout = null;
 		break;
 
-	case 'reset':
 	case 'refresh':
-	case 'pause':
+		ChartTimer();
+		break;
+		
+	case 'reset':
 		// unsupported but required event messages, do nothing but dont error
 		break;
 	default:
@@ -58,17 +62,15 @@ function ChartWidgetWorker(oEvent) {
 }
 
 /**
- * When the timer kicks in, we run this - currently RANDOM DEBUG results are returned
+ * When the timer kicks in, we run this.
+ * We ask the chart to refresh the data - this creates a msg object or returns null.
+ * The object should return null if the values have not changed, because then we do not send a msg to the UI.
  */
 function ChartTimer() {
-	var _active = Math.floor((Math.random() * 100));
-	var _inactive = 100 - _active;
-	
-	var msg = new SimpleMessage();
-	msg.header.type = "update";
-	msg.data["active"] = _active;
-	msg.data["inactive"] = _inactive;
-	postMessage(msg);
+	var msg = chart.refresh();
+	if(msg!=null) {
+		postMessage(msg);
+	}
 	
 	_timeout = setTimeout(ChartTimer, _interval);
 }

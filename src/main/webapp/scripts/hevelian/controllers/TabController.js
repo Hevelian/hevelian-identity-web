@@ -71,7 +71,7 @@ function TabController() {
 		var tabLogout = document.createElement("DIV");
 		tabLogout.setAttribute("class", "tab_logout");
 		target.appendChild(tabLogout);
-		tabLogout.innerHTML = "logout";
+		tabLogout.innerHTML = '<span class="glyphicon glyphicon-log-out" style="color: white"></span>&nbsp;&nbsp;logout';
 		tabLogout.onclick = function() {document.location.href = "index.html";}
 		
 		var thinBlueLine = document.createElement("DIV");

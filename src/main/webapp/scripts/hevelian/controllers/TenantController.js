@@ -99,7 +99,7 @@ function TenantController() {
 	// FAKED DATA
 	function _createInspectorPanel(_panelTarget) {
 		var panel = document.createElement("DIV");
-		panel.setAttribute("class", "panel panel-default panel-inspector");
+		panel.setAttribute("class", "panel panel-default");
 		_panelTarget.appendChild(panel);
 		
 		var panelHeader = document.createElement("DIV");
@@ -124,7 +124,7 @@ function TenantController() {
 		panelHeader.setAttribute("class", "panel-heading");
 		panel.appendChild(panelHeader);
 
-		var str = '<table class="table table-striped table-hover table-bordered">';
+		var str = '<table class="table table-striped table-hover table-bordered table-condensed">';
 			str += '<thead><tr><th>Name</th><th>admin user</th><th>active</th></tr></thead>';
 			str += '<tbody><tr><td>myFirstDomain</td><td>bob</td><td>true</td></tr>';
 			str += '<tr class="info"><td>anotherTenant</td><td>yuriy</td><td>true</td></tr>';
