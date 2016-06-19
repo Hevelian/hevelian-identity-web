@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-        <context:component-scan base-package="com.hevelian.identity.web.api">
+        <context:component-scan base-package="com.hevelian.identity.web">
         </context:component-scan>
 
 </beans>
