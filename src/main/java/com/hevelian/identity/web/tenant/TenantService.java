@@ -1,13 +1,13 @@
 package com.hevelian.identity.web.tenant;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.hevelian.identity.client.model.Tenant;
 import com.hevelian.identity.web.api.TenantController;
 import com.hevelian.identity.web.session.SessionStore;
@@ -27,10 +27,10 @@ public class TenantService {
 		this.tenantEngine = tenantEngine;
 	}
 
-	public List<Tenant> getAllTenants() throws UnsupportedEncodingException, ApiException {
+	public String getAllTenants() throws UnsupportedEncodingException, ApiException {
 		logger.debug("TenantService: get all tenants");
 
-		return tenantEngine.getAllTenants(getAuthenticationString());
+		return new Gson().toJson(tenantEngine.getAllTenants(getAuthenticationString()));
 	}
 	
 	public Tenant getTenant(String domain) throws UnsupportedEncodingException, ApiException {

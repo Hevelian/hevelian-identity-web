@@ -11,8 +11,11 @@ function TenantController() {
 	var widgets						= [];
 	var worker						= null;
 	
+	var dataRowTable				= null;
+	
 	this.init						= _init;
 	this.focus						= _focus;
+	this.OnMessage					= _onMessage;
 	
 	
 	function _init(_target, _doc) {
@@ -20,9 +23,16 @@ function TenantController() {
 		doc 		= _doc;
 
 		var date 	= new Date();
-		id 			= getId() + "_hello";
+		id 			= getId() + "_tenant";
 		
-//		_createContainer();
+		// initialise Worker object
+		worker = new Worker("scripts/hevelian/workers/TenantWorker.js");
+		worker.onmessage = this.OnMessage;
+
+		var msg = new SimpleMessage();
+		msg.header.type = "init";
+		worker.postMessage(msg);		
+		
 	}
 	
 	function _focus() {
@@ -30,6 +40,37 @@ function TenantController() {
 			_createContainer();
 		} else {
 			// refresh the data and un-pause the worker
+		}
+	}
+	
+	function _onMessage(oEvent) {
+		console.log("TenantController: got message: " + oEvent);
+		
+		if(oEvent.data.header.type=='all') {
+			dataRowTable.innerHTML = "";
+			var panel = document.createElement("DIV");
+			panel.setAttribute("class", "panel panel-default");
+			dataRowTable.appendChild(panel);
+			
+			var panelHeader = document.createElement("DIV");
+			panelHeader.setAttribute("class", "panel-heading");
+			panel.appendChild(panelHeader);
+
+			var tenants = JSON.parse(oEvent.data.data[0]);
+			var str = '<table class="table table-striped table-hover table-bordered table-condensed">';
+				str += '<thead><tr><th>Name</th><th>admin user</th><th>active</th></tr></thead>';
+				str += '<tbody>';
+
+				for(var i=0; i<tenants.length; i++) {
+					console.log("TenantController: got tenant: " + tenants[i].domain);
+					str += '<tr><td>'+tenants[i].domain+'</td><td>'+tenants[i].tenantAdmin.name+'</td><td>'+tenants[i].active+'</td></tr>';
+				}
+				str += '</tbody>';
+			str += '</table>';
+			
+			panelHeader.innerHTML = "Tenants";
+			panel.innerHTML += str;
+			
 		}
 	}
 	
@@ -84,7 +125,7 @@ function TenantController() {
 		dataRow.setAttribute("class", "row row-padding");
 		container.appendChild(dataRow);
 			
-		var dataRowTable = document.createElement("DIV");
+		dataRowTable = document.createElement("DIV");
 		dataRowTable.setAttribute("class", "col-md-8 row-padding");
 		dataRow.appendChild(dataRowTable);
 		
@@ -116,6 +157,13 @@ function TenantController() {
 	
 	// FAKED DATA
 	function _createDataTable(_dataTarget) {
+		
+		// TEST - send message to get all tenants
+		var _msg = new SimpleMessage();
+		_msg.header.type = 'all';
+		worker.postMessage(_msg);
+		
+		/*
 		var panel = document.createElement("DIV");
 		panel.setAttribute("class", "panel panel-default");
 		_dataTarget.appendChild(panel);
@@ -135,5 +183,6 @@ function TenantController() {
 		
 		panelHeader.innerHTML = "Tenants";
 		panel.innerHTML += str;
+		*/
 	}
 }
