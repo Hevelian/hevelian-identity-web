@@ -21,14 +21,15 @@ function TenantWorker(oEvent) {
 	
 	case 'all':
 		var _allTenants = tenant.GetAllTenants();
-		var msg = new SimpleMessage();
-		msg.header.type = "all";
-		msg.data[0] = _allTenants;
-		postMessage(msg);
+		if(_allTenants!=null) {
+			var msg = new SimpleMessage();
+			msg.header.type = "all";
+			msg.data[0] = _allTenants;
+			postMessage(msg);
+		}
 		break;
 	
 	case 'init':
-		console.log("tenant worker initialised");
 		_enabled = true;
 		
 		var _data = oEvent.data.data;
@@ -36,10 +37,12 @@ function TenantWorker(oEvent) {
 
 		// on init we get all tenants and send a msg back
 		var _allTenants = tenant.GetAllTenants();
-		var msg = new SimpleMessage();
-		msg.header.type = "all";
-		msg.data[0] = _allTenants;
-		postMessage(msg);
+		if(_allTenants!=null) {
+			var msg = new SimpleMessage();
+			msg.header.type = "all";
+			msg.data[0] = _allTenants;
+			postMessage(msg);
+		}
 		break;
 
 	case 'start':
@@ -63,17 +66,18 @@ function TenantWorker(oEvent) {
 		// unsupported but required event messages, do nothing but dont error
 		break;
 	default:
-		console.log("Tenant: unknown event type");
+		console.log("TenantWorker: unknown event type");
 	}	
 }
 
 function TenantTimer() {
-	console.log("TenantTimer fired");
 	var _allTenants = tenant.GetAllTenants();
-	var msg = new SimpleMessage();
-	msg.header.type = "all";
-	msg.data[0] = _allTenants;
-	postMessage(msg);
+	if(_allTenants!=null) {
+		var msg = new SimpleMessage();
+		msg.header.type = "all";
+		msg.data[0] = _allTenants;
+		postMessage(msg);
+	}
 
 	_timeout = setTimeout(TenantTimer, _interval);
 
