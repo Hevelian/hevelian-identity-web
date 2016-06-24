@@ -12,6 +12,7 @@ function TenantController() {
 	var worker						= null;
 	
 	var dataRowTable				= null;
+	var dataHeaderCountColumn		= null;
 	
 	this.init						= _init;
 	this.focus						= _focus;
@@ -61,6 +62,7 @@ function TenantController() {
 				str += '<thead><tr><th>Name</th><th>admin user</th><th>active</th></tr></thead>';
 				str += '<tbody>';
 
+				dataHeaderCountColumn.innerHTML = "showing " +tenants.length+ " of " + tenants.length;
 				for(var i=0; i<tenants.length; i++) {
 					console.log("TenantController: got tenant: " + tenants[i].domain);
 					str += '<tr><td>'+tenants[i].domain+'</td><td>'+tenants[i].tenantAdmin.name+'</td><td>'+tenants[i].active+'</td></tr>';
@@ -104,7 +106,7 @@ function TenantController() {
 		dataHeaderNewButtonColumn.setAttribute("class", "col-md-2 row-padding");
 		dataHeaderRow.appendChild(dataHeaderNewButtonColumn);
 		
-		var dataHeaderCountColumn = document.createElement("DIV");
+		dataHeaderCountColumn = document.createElement("DIV");
 		dataHeaderCountColumn.setAttribute("class", "col-md-6");
 		dataHeaderRow.appendChild(dataHeaderCountColumn);
 
