@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import com.hevelian.identity.client.api.TenantcontrollerApi;
 import com.hevelian.identity.client.model.Tenant;
 import com.hevelian.identity.client.model.TenantDomainDTO;
+import com.hevelian.identity.client.model.TenantRequestDTO;
+import com.hevelian.identity.client.model.UserRequestDTO;
 import com.migcomponents.migbase64.Base64;
 
 import io.swagger.client.ApiClient;
@@ -32,6 +34,23 @@ public class TenantEngine {
 		TenantDomainDTO tenantDomainDTO = new TenantDomainDTO();
 		tenantDomainDTO.setTenantDomain(domain);
 		return api.getTenantUsingPOST(tenantDomainDTO);
+	}
+	
+	public void addTenant(String domain, String username, String password) throws ApiException, UnsupportedEncodingException {
+		ApiClient client = getApiClient();
+
+		TenantRequestDTO tenant = new TenantRequestDTO();
+		tenant.setDomain(domain);
+		tenant.setActive(true);
+		
+		UserRequestDTO tenantAdmin = new UserRequestDTO();
+		tenantAdmin.setName(username);
+		tenantAdmin.setPassword(password);
+		tenant.setTenantAdmin(tenantAdmin);
+		
+		TenantcontrollerApi api = new TenantcontrollerApi(client);
+		api.addTenantUsingPOST(tenant);
+	
 	}
 	
 	private ApiClient getApiClient() throws UnsupportedEncodingException {

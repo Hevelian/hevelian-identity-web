@@ -1,0 +1,33 @@
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      	<script>
+      		function saveTenant() {
+      			
+      			var name 		= encodeURIComponent(document.getElementById('frm_name').value);
+      			var username 	= encodeURIComponent(document.getElementById('frm_username').value);
+      			var password 	= encodeURIComponent(document.getElementById('frm_password').value);
+
+      			Hevelian.controller.active.TenantController.NewTenant(name, username, password);
+      			
+      			$('#modalPanel').modal('hide');
+      		}
+      	</script>
+      	<h4>Add New Tenant</h4>
+      	The Tenant name must be unique, and you must specify a tenant administrator username and password, which must also be unique.
+      	<br/><br/>		
+      	
+      	<form method="POST" action="#">
+		
+			<input type="text" id="frm_name" name="frm_name" size="30" value=""/>&nbsp; tenant name<br/>
+			<br/>
+			<p style="text-decoration: underline;">Tenant Administrator</p>
+			<input type="text" id="frm_username" name="frm_url" size="30" value=""/>&nbsp; user name<br/>
+			<input type="password" id="frm_password" name="frm_password" size="30" value=""/>&nbsp; password<br/>
+			<br/>
+			<button type="button" class="btn btn-default btn-sm" onClick="saveTenant()">Save Tenant</button>
+			
+		</form>
+      </div>
+  </div>
+ </div>

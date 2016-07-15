@@ -9,6 +9,7 @@ function TenantWorkerObject() {
 	var _lastResult	= null;
 	
 	this.GetAllTenants		= _getAllTenants;
+	this.AddTenant			= _addTenant;
 	
 	function _getAllTenants() {
 		var _json = _ajax.GetNowAsText("GET", _endpoint + "all", null);
@@ -18,5 +19,11 @@ function TenantWorkerObject() {
 			return _json;
 		}
 		return null;
+	}
+	
+	function _addTenant(_data) {
+		var _postdata = "frm_domain=" + _data["name"] + "&frm_username=" + _data["username"] + "&frm_password=" + _data["password"];
+		var _result = _ajax.GetNowAsText("POST", _endpoint + "tenant", _postdata);
+		console.log("WORKER: ADD TENANT: " + _result);
 	}
 }

@@ -17,6 +17,8 @@ var _interval	= 10000;
 
 
 function TenantWorker(oEvent) {
+	var _data = oEvent.data.data;
+	
 	switch(oEvent.data.header.type) {
 	
 	case 'all':
@@ -29,6 +31,10 @@ function TenantWorker(oEvent) {
 		}
 		break;
 	
+	case 'addTenant':
+		tenant.AddTenant(_data);
+		break;
+		
 	case 'init':
 		_enabled = true;
 		

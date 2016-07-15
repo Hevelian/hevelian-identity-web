@@ -17,6 +17,13 @@
 					<property>active</property>
 					<indicator>active</indicator>
 				</widget>
+				<grid id="tenantGrid" authToken="HIS.main.Tenants.tenantGrid" pageSize="50">
+					<columns>
+						<column label="Name" data="domain"/>
+						<column label="Admin User" data="tenantAdmin.name"/>
+						<column label="Active" data="active"/>
+					</columns>
+				</grid>
 			</widgets>
 		</tab>
 		<tab id="Configuration" 	authToken="HIS.main.Configuration"		controller="HelloController">Configuration</tab>

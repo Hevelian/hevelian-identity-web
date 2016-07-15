@@ -13,7 +13,9 @@ Hevelian.controller.MainController 		= MainController;
 Hevelian.controller.TabController 		= TabController;
 Hevelian.controller.TenantController 	= TenantController;
 
-Hevelian.controller.HelloController 	= HelloController;
+Hevelian.controller.HelloController 	= HelloController;		// debug/test controller
+
+Hevelian.controller.active = {};
 
 //connection stuff
 Hevelian.con = {};

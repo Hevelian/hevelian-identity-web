@@ -10,6 +10,8 @@ function TenantController() {
 	var widgetRow					= null;
 	var widgets						= [];
 	var worker						= null;
+	var grid						= null;
+	var _me							= this;
 	
 	var dataRowTable				= null;
 	var dataHeaderCountColumn		= null;
@@ -17,6 +19,8 @@ function TenantController() {
 	this.init						= _init;
 	this.focus						= _focus;
 	this.OnMessage					= _onMessage;
+	this.ClickAddTenantButton		= _handlerClickAddTenantButton;
+	this.NewTenant					= _newTenant;
 	
 	
 	function _init(_target, _doc) {
@@ -32,7 +36,9 @@ function TenantController() {
 
 		var msg = new SimpleMessage();
 		msg.header.type = "init";
-		worker.postMessage(msg);		
+		worker.postMessage(msg);
+		
+		Hevelian.controller.active.TenantController = _me;
 		
 	}
 	
@@ -58,6 +64,14 @@ function TenantController() {
 			panel.appendChild(panelHeader);
 
 			var tenants = JSON.parse(oEvent.data.data[0]);
+			
+			if(grid==null) {
+				grid = new TenantGrid(tenants, panel, dataHeaderCountColumn, doc.getElementsByTagName("grid")[0]);
+				grid.init();
+			} else {
+				grid.Refresh(tenants);
+			}
+			
 			var str = '<table class="table table-striped table-hover table-bordered table-condensed">';
 				str += '<thead><tr><th>Name</th><th>admin user</th><th>active</th></tr></thead>';
 				str += '<tbody>';
@@ -74,6 +88,33 @@ function TenantController() {
 			panel.innerHTML += str;
 			
 		}
+	}
+	
+	function _handlerClickAddTenantButton(e) {
+
+		if(document.getElementById('modalPanel')==null) {
+			var divModal = document.createElement("DIV");
+			divModal.setAttribute("id", "modalPanel");
+			divModal.setAttribute("class", "modal fade");
+			divModal.setAttribute("role", "dialog");
+			document.getElementById("main").appendChild(divModal);
+		}
+
+		$('#modalPanel').load("panels/edit_tenant.html", function() {
+			$(this).modal('show');
+		});
+		
+	}
+
+	function _newTenant(_name, _username, _password) {
+		console.log("NEW TENANT: " + _name);
+		var msg = new SimpleMessage();
+		msg.header.type = "addTenant";
+		msg.data["name"] = _name;
+		msg.data["username"] = _username;
+		msg.data["password"] = _password;
+		worker.postMessage(msg);
+
 	}
 	
 	function _createContainer() {
@@ -115,7 +156,7 @@ function TenantController() {
 		dataHeaderRow.appendChild(dataHeaderEmptyColumn);
 
 		// DEBUG - FAKE DATA
-		dataHeaderNewButtonColumn.innerHTML = '<p><a class="btn btn-default btn-sm" href="#" role="button">New Tenant</a></p>';
+		dataHeaderNewButtonColumn.innerHTML = '<p><a class="btn btn-default btn-sm" id="buttonNewTenant" role="button">New Tenant</a></p>';
 		dataHeaderCountColumn.innerHTML = 'Showing 5 of 5 tenants';
 		dataHeaderCountColumn.style.paddingTop = "14px";
 		dataHeaderCountColumn.style.textAlign = "right";
@@ -134,6 +175,8 @@ function TenantController() {
 		var dataRowPanel = document.createElement("DIV");
 		dataRowPanel.setAttribute("class", "col-md-4 col-inspector");
 		dataRow.appendChild(dataRowPanel);
+		
+		document.getElementById("buttonNewTenant").onclick = _me.ClickAddTenantButton;
 		
 		_createDataTable(dataRowTable);
 		_createInspectorPanel(dataRowPanel);

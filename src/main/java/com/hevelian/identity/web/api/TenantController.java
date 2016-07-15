@@ -1,6 +1,7 @@
 package com.hevelian.identity.web.api;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,6 +32,21 @@ public class TenantController {
 		this.tenantService = tenantService;
 	}
 
+	@RequestMapping(value="/tenant", method=RequestMethod.POST)
+	public ResponseEntity<byte[]> addTenant(HttpServletRequest request) throws ApiException, UnsupportedEncodingException {
+		logger.debug("TenantController: add new tenant");
+		
+		String frm_domain			= request.getParameter("frm_domain");
+		String frm_username			= request.getParameter("frm_username");
+		String frm_password			= request.getParameter("frm_password");
+
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		
+		tenantService.addTenant(frm_domain, frm_username, frm_password);
+		return new ResponseEntity<byte[]>("OK".getBytes("UTF-8"), responseHeaders, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public ResponseEntity<byte[]> getAllTenants(HttpServletRequest request) throws ParserConfigurationException, IOException, ApiException {
 		logger.debug("TenantController: get all tenants");

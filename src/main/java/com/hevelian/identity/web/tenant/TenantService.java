@@ -37,6 +37,10 @@ public class TenantService {
 		return tenantEngine.getTenant(getAuthenticationString(), domain);
 	}
 	
+	public void addTenant(String domain, String username, String password) throws ApiException, UnsupportedEncodingException {
+		tenantEngine.addTenant(domain, username, password);
+	}
+	
 	/**
 	 * getAuthenticationString
 	 * Calculates the string used for basic auth with the Identity Server. If no tenant id is specified then
