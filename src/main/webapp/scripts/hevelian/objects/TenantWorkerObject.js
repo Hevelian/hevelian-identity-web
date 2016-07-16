@@ -22,7 +22,10 @@ function TenantWorkerObject() {
 	}
 	
 	function _addTenant(_data) {
-		var _postdata = "frm_domain=" + _data["name"] + "&frm_username=" + _data["username"] + "&frm_password=" + _data["password"];
+		var _postdata = "frm_domain=" + encodeURIComponent(_data["name"]) + "&frm_username=" 
+			+ encodeURIComponent(_data["username"]) + "&frm_password=" 
+			+ encodeURIComponent(_data["password"]);
+		
 		var _result = _ajax.GetNowAsText("POST", _endpoint + "tenant", _postdata);
 		console.log("WORKER: ADD TENANT: " + _result);
 	}

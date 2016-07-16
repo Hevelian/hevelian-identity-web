@@ -107,7 +107,6 @@ function TenantController() {
 	}
 
 	function _newTenant(_name, _username, _password) {
-		console.log("NEW TENANT: " + _name);
 		var msg = new SimpleMessage();
 		msg.header.type = "addTenant";
 		msg.data["name"] = _name;

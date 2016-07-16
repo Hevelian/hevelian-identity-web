@@ -3,7 +3,6 @@
       <div class="modal-body">
       	<script>
       		function saveTenant() {
-      			
       			var name 		= encodeURIComponent(document.getElementById('frm_name').value);
       			var username 	= encodeURIComponent(document.getElementById('frm_username').value);
       			var password 	= encodeURIComponent(document.getElementById('frm_password').value);
@@ -17,17 +16,52 @@
       	The Tenant name must be unique, and you must specify a tenant administrator username and password, which must also be unique.
       	<br/><br/>		
       	
-      	<form method="POST" action="#">
-		
-			<input type="text" id="frm_name" name="frm_name" size="30" value=""/>&nbsp; tenant name<br/>
-			<br/>
+      	<form method="POST" role="form" data-toggle="validator" id="tenant_form">
+
+			<div class="form-group row has-feedback">
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input type="text" class="form-control form-control-sm" id="frm_name"
+							placeholder="domain name" required="true" data-minlength="5"/>
+						<div class="input-group-addon">&nbsp;<span class="glyphicon form-control-feedback" aria-hidden="true"></span></div>
+						
+					</div>
+				</div>
+				<label for="frm_name" class="col-sm-6 form-control-label">tenant domain name</label>
+			</div>
+
 			<p style="text-decoration: underline;">Tenant Administrator</p>
-			<input type="text" id="frm_username" name="frm_url" size="30" value=""/>&nbsp; user name<br/>
-			<input type="password" id="frm_password" name="frm_password" size="30" value=""/>&nbsp; password<br/>
+
+			<div class="form-group row has-feedback">
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input type="text" class="form-control form-control-sm" id="frm_username"
+							placeholder="admin user name" required="true" data-minlength="5"/>
+						<div class="input-group-addon">&nbsp;<span class="glyphicon form-control-feedback" aria-hidden="true"></span></div>
+					</div>
+				</div>
+				<label for="frm_username" class="col-sm-6 form-control-label">admin user name</label>
+			</div>
+
+			<div class="form-group row has-feedback">
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input type="password" class="form-control form-control-sm" id="frm_password"
+							placeholder="admin user password" required="true" data-minlength="8"/>
+						<div class="input-group-addon">&nbsp;<span class="glyphicon form-control-feedback" aria-hidden="true"></span></div>
+					</div>
+				</div>
+				<label for="frm_password" class="col-sm-6 form-control-label">admin user password</label>
+			</div>
 			<br/>
-			<button type="button" class="btn btn-default btn-sm" onClick="saveTenant()">Save Tenant</button>
+			<button type="submit" class="btn btn-default btn-sm" onClick="saveTenant()">Save Tenant</button>
+			<br/>
+			<br/>
 			
 		</form>
       </div>
   </div>
+  <script>
+  	$('#tenant_form').validator('update');
+  </script>
  </div>
