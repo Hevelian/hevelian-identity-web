@@ -1,8 +1,13 @@
+
 #main {
 	background-color: #e0e0e0;
 	overflow: hidden;
 	line-height: 20px;
 	font-size: 12px;
+}
+
+.hevelian-container {
+	margin-bottom: 60px;	
 }
 
 .fixed-panel {

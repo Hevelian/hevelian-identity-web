@@ -52,6 +52,7 @@ function TenantController() {
 	
 	function _onMessage(oEvent) {
 		console.log("TenantController: got message: " + oEvent);
+		Hevelian.controller.active.FooterController.AddMessage("Tenant Controller Received Event Message");
 		
 		if(oEvent.data.header.type=='all') {
 			dataRowTable.innerHTML = "";
@@ -119,7 +120,7 @@ function TenantController() {
 	function _createContainer() {
 		
 		container = document.createElement("DIV");
-		container.setAttribute("class", "container");
+		container.setAttribute("class", "container hevelian-container");
 		target.appendChild(container);
 		
 		widgetRow = document.createElement("DIV");

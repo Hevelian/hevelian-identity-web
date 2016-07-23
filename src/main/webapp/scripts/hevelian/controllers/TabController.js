@@ -78,6 +78,10 @@ function TabController() {
 		thinBlueLine.setAttribute("class", "thinBlueLine");
 		target.appendChild(thinBlueLine);
 		
+		// we want to create a footer area for status messages too
+		var footerController = new FooterController();
+		footerController.init(_target);
+		
 		controllers[0].focus();
 	}
 	

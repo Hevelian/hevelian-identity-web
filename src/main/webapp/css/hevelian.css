@@ -1,3 +1,10 @@
+hevelian-navbar-bottom {
+	padding-top: 10px;
+	padding-left: 10px;
+	font-size: 12px;
+	line-height: 20px;
+}
+
 .colourBox {
 	width: 200px;
 	height: 214px;
@@ -131,6 +138,8 @@ html, body {
 	font-size: 12px;
 	margin: 0px;
 	line-height: 30px;
+	padding-bottom: 70px;
+	
 }
 
 .tdheader {
