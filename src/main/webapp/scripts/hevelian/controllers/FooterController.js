@@ -18,11 +18,13 @@ function FooterController() {
 	
 	function _init(_target) {
 		target = _target;
-		container = document.createElement("footer");
-		container.setAttribute("class", "navbar navbar-default navbar-fixed-bottom hevelian-navbar-bottom");
-		container.setAttribute("id", "fixedFooter");
+		var div = document.createElement("footer");
+		div.setAttribute("class", "navbar navbar-default navbar-fixed-bottom");
+		_target.appendChild(div);
 		
-		_target.appendChild(container);
+		container = document.createElement("div");
+		container.setAttribute("class", "hevelian-navbar-bottom");
+		div.appendChild(container);
 		
 		_timeout = setTimeout(_me.DoTimeout, _interval);
 		
