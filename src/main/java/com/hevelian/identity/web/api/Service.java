@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hevelian.identity.client.ApiClient;
+import com.hevelian.identity.client.ApiException;
 import com.hevelian.identity.client.api.TenantcontrollerApi;
 import com.hevelian.identity.client.model.Tenant;
 import com.hevelian.identity.client.model.TenantRequestDTO;
 import com.hevelian.identity.client.model.UserRequestDTO;
 import com.migcomponents.migbase64.Base64;
-
-import io.swagger.client.ApiClient;
-import io.swagger.client.ApiException;
 
 @Controller
 @RequestMapping(path = "/Service")

@@ -6,15 +6,14 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.hevelian.identity.client.ApiClient;
+import com.hevelian.identity.client.ApiException;
 import com.hevelian.identity.client.api.TenantcontrollerApi;
 import com.hevelian.identity.client.model.Tenant;
 import com.hevelian.identity.client.model.TenantDomainDTO;
 import com.hevelian.identity.client.model.TenantRequestDTO;
 import com.hevelian.identity.client.model.UserRequestDTO;
 import com.migcomponents.migbase64.Base64;
-
-import io.swagger.client.ApiClient;
-import io.swagger.client.ApiException;
 
 @Component
 @Scope("singleton")

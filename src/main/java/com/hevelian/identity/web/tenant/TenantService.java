@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.hevelian.identity.client.ApiException;
 import com.hevelian.identity.client.model.Tenant;
 import com.hevelian.identity.web.api.TenantController;
 import com.hevelian.identity.web.session.SessionStore;
-
-import io.swagger.client.ApiException;
 
 @Service
 public class TenantService {

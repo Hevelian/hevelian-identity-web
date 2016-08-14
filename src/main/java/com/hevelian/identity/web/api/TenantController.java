@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hevelian.identity.client.ApiException;
 import com.hevelian.identity.web.tenant.TenantService;
-
-import io.swagger.client.ApiException;
 
 @Controller
 @RequestMapping("/tenant.svc")
