@@ -79,7 +79,7 @@ function TenantController() {
 				dataHeaderCountColumn.innerHTML = "showing " +tenants.length+ " of " + tenants.length;
 				for(var i=0; i<tenants.length; i++) {
 					console.log("TenantController: got tenant: " + tenants[i].domain);
-					str += '<tr><td>'+tenants[i].domain+'</td><td>'+tenants[i].tenantAdmin.name+'</td><td>'+tenants[i].active+'</td></tr>';
+					str += '<tr><td>'+tenants[i].domain+'</td><td>'+tenants[i].adminName+'</td><td>'+tenants[i].active+'</td></tr>';
 				}
 				str += '</tbody>';
 			str += '</table>';

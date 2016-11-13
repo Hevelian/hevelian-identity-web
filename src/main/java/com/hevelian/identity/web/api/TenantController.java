@@ -58,7 +58,7 @@ public class TenantController {
 		return new ResponseEntity<byte[]>("OK".getBytes("UTF-8"), responseHeaders, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/all", method=RequestMethod.GET)
+	@RequestMapping(value="/all", method=RequestMethod.GET, produces="application/json")
 	public ResponseEntity<byte[]> getAllTenants(HttpServletRequest request) throws ParserConfigurationException, IOException, ApiException {
 		logger.debug("TenantController: get all tenants");
 		

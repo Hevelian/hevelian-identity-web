@@ -10,20 +10,31 @@ import com.hevelian.identity.client.ApiClient;
 import com.hevelian.identity.client.ApiException;
 import com.hevelian.identity.client.api.TenantcontrollerApi;
 import com.hevelian.identity.client.model.Tenant;
+import com.hevelian.identity.client.model.TenantAdminRequestDTO;
 import com.hevelian.identity.client.model.TenantDomainDTO;
 import com.hevelian.identity.client.model.TenantRequestDTO;
-import com.hevelian.identity.client.model.UserRequestDTO;
 import com.migcomponents.migbase64.Base64;
 
 @Component
 @Scope("singleton")
 public class TenantEngine {
 
+	String basicAcceptHeader[] = {"*/*"};
+	String acceptHeader[] = {"application/json"};
+	String contentTypes[] = {};
+	
 	public List<Tenant> getAllTenants(String authentication) throws ApiException, UnsupportedEncodingException {
 		ApiClient client = getApiClient();
 		
 		TenantcontrollerApi api = new TenantcontrollerApi(client);
-		return api.getAllTenantsUsingGET();
+		List<Tenant> tenants = null;
+		try {
+			tenants = api.getAllTenantsUsingGET();
+		} catch(ApiException e) {
+			System.out.println(e.getResponseBody());
+		}
+		
+		return tenants;
 	}
 	
 	public Tenant getTenant(String authentication, String domain) throws ApiException, UnsupportedEncodingException {
@@ -41,8 +52,9 @@ public class TenantEngine {
 		TenantRequestDTO tenant = new TenantRequestDTO();
 		tenant.setDomain(domain);
 		tenant.setActive(true);
+		tenant.setContactEmail("colin@4tune.net");
 		
-		UserRequestDTO tenantAdmin = new UserRequestDTO();
+		TenantAdminRequestDTO tenantAdmin = new TenantAdminRequestDTO();
 		tenantAdmin.setName(username);
 		tenantAdmin.setPassword(password);
 		tenant.setTenantAdmin(tenantAdmin);
@@ -57,8 +69,10 @@ public class TenantEngine {
 		
 //		client.addDefaultHeader("Authorization", "Basic " + Base64.encodeToString(authentication.getBytes("UTF-8"), false));
 		client.addDefaultHeader("Authorization", "Basic " + Base64.encodeToString("admin:admin".getBytes("UTF-8"), false));
+		client.addDefaultHeader("Accept", "application/json");
 		client.setBasePath("http://localhost:8082/identity-server");
 		
+		System.out.println("SET API CLIENT PARAMETERS TO ACCEPT");
 		return client;
 	}
 }
